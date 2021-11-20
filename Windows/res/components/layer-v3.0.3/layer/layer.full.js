@@ -1,9 +1,9 @@
 
 /**
- @Name：layer v3.0.3 Web弹层组件
- @Author：贤心
- @Site：http://layer.layui.com
- @License：MIT
+ @Name: layer v3.0.3 Web弹层组件
+ @Author: 贤心
+ @Site: http://layer.layui.com
+ @License: MIT
 
  */
 
@@ -24,7 +24,7 @@
         type: ['dialog', 'page', 'iframe', 'loading', 'tips']
     };
 
-//默认内置方法。
+//默认内置方法. 
     var layer = {
         v: '3.0.3',
         ie: function(){ //ie版本
@@ -55,7 +55,7 @@
         //载入CSS配件
         link: function(href, fn, cssname){
 
-            //未设置路径，则不主动加载css
+            //未设置路径, 则不主动加载css
             if(!layer.path) return;
 
             var head = $('head')[0], link = document.createElement('link');
@@ -728,7 +728,7 @@
         return $('#'+ doms[0] + index).find('iframe').contents().find(selector);
     };
 
-//得到当前iframe层的索引，子iframe时使用
+//得到当前iframe层的索引, 子iframe时使用
     layer.getFrameIndex = function(name){
         return $('#'+ name).parents('.'+doms[4]).attr('times');
     };
@@ -929,7 +929,7 @@
     };
 
     /**
-     拓展模块，layui开始合并在一起
+     拓展模块, layui开始合并在一起
      */
 
     var cache = layer.cache||{}, skin = function(type){
@@ -1179,7 +1179,7 @@
                     var imgarea = [img.width, img.height];
                     var winarea = [$(window).width() - 100, $(window).height() - 100];
 
-                    //如果 实际图片的宽或者高比 屏幕大（那么进行缩放）
+                    //如果 实际图片的宽或者高比 屏幕大 (那么进行缩放) 
                     if(!options.full && (imgarea[0]>winarea[0]||imgarea[1]>winarea[1])){
                         var wh = [imgarea[0]/winarea[0],imgarea[1]/winarea[1]];//取宽度缩放比例、高度缩放比例
                         if(wh[0] > wh[1]){//取缩放比例最大的进行缩放
