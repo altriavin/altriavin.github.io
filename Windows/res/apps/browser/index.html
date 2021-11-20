@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <!-- Head -->
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Page Title -->
+    
+        
+            <title>Hexo</title>
+        
+    
+    <link rel="icon" href="/img/avatar-default.png">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+<script src="/js/script.js"></script>
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <style>
+        .deactiveColor{
+            color: #37474f;
+        }
+        .activeColor{
+            color: #006064;
+        }
+        a:hover{
+            color: #006064;
+        }
+        .header-btn{
+            color: #37474f;
+        }
+        
+        .post-content img{
+            margin: 50px auto;
+        }
+        
+    </style>
+<meta name="generator" content="Hexo 5.4.0"></head>
+    <body>
+        <div class="container">
+
+            <!-- Top Anchor -->
+            <div id="top"></div>
+
+            <!-- Header -->
+            <header class="header-wrapper">
+    <div class="header-title-wrapper">
+        <!-- Page Title -->
+        <p class="header-title">
+              
+                Hexo
+            
+        </p>  
+    </div>    
+
+    
+        <!-- Division Line -->
+        <div class="division"></div> 
+    
+    
+    <div class="header-detail">
+        <!-- Header Button -->
+        <div class="header-btn-wrapper">
+            
+                <span>
+                    <a class="home-btn header-btn" href="/" title="homepage"><i class="fa fa-home"></i></a>
+                </span>
+
+                
+                    <span>
+                        <a class="header-btn" href="/archives" title="archives"><i class="fa fa fa-file-text-o"></i></a>
+                    </span>
+                
+            
+        </div>
+    </div>
+</header>
+
+            <!-- Main -->
+            <main>
+                <article class="post-wrapper">
+    
+
+    
+
+    
+
+    
+
+    <!-- Article Content -->
+    <div class="post-content">
+        <!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../../../res/components/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="../../yl.app.js" ></script>
+    <script src="../../../res/components/vue.min.js" ></script>
+    <script src="../../../res/components/jquery-2.2.4.min.js" ></script>
+    <script src="../../../res/components/jquery.nicescroll.min.js" ></script>
+    <link rel="stylesheet" href="./index.css" />
+    <title>浏览器</title>
+</head>
+<body>
+<div id="app">
+    <div id="url-box">
+        <input @keyup.enter="visit()" id="url-ipt" spellcheck="false" autofocus v-model="url" />
+    </div>
+    <div id="btn-go" @click="visit()"><i class="fa fa-location-arrow fa-fw"></i></div>
+    <div class="clear"></div>
+    <ul id="history-box">
+       <li v-for="item in list">
+           <span class="left text-one-line"
+                 @click="visit(item.url)"
+                 :title="item.url"></span>
+           <span class="right text-one-line">
+               { {new Date(item.date).format('MM-dd hh:mm')} }
+           </span>
+       </li>
+    </ul>
+</div>
+<script>
+    var storageName='yluiAppsBrowser';
+    function urlFormat(url) {
+        url=url.replace(/(^\s*)|(\s*$)/g, "");
+        var preg=/^(https?:\/\/|\.\.?\/|\/\/?)/i;
+        if(!preg.test(url)){
+            url='//'+url;
+        }
+        return url;
+    }
+
+    function jump(url) {
+//        url=urlFormat(url);
+        if(YLApp.id){
+            YLApp.eval('setWinData',{
+                url :url,
+                urlBar:url
+            })
+        }else{
+            try{
+                location.href=url;
+            }catch (e){
+                alert('不正确的地址')
+            }
+        }
+    }
+
+    var vue=new Vue({
+        el:"#app",
+        data:{
+            url:"",
+            list:[],
+        },
+        created:function () {
+            Date.prototype.format = function (fmt) { //author: meizz
+                if (!fmt) {
+                    fmt = 'yyyy-MM-dd hh:mm:ss';
+                }
+                var o = {
+                    "M+": this.getMonth() + 1, //月份
+                    "d+": this.getDate(), //日
+                    "h+": this.getHours(), //小时
+                    "m+": this.getMinutes(), //分
+                    "s+": this.getSeconds(), //秒
+                    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                    "S": this.getMilliseconds() //毫秒
+                };
+                if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                for (var k in o)
+                    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                return fmt;
+            };
+            if(localStorage[storageName]){
+                this.list=JSON.parse(localStorage[storageName]);
+            }
+            this.$nextTick(function () {
+                $("#history-box").niceScroll({
+                    cursorcolor: "#ffffff30",
+                    cursorwidth: "4px", // 滚动条的宽度，单位：便素
+                    cursorborder: "none", // CSS方式定义滚动条边框
+                    grabcursorenabled: false,
+                });
+            });
+
+        },
+        methods:{
+            save:function () {
+                localStorage[storageName]=JSON.stringify(this.list);
+            },
+            visit:function (url) {
+                url||(url=this.url);
+                if(!url) return;
+                url= urlFormat(url);
+                //查找是否已存在于列表
+                if(this.list.length>0){
+                    var found=false,foundIndex=null;
+                    this.list.forEach(function (t, n) {
+                        if(found){return}
+                        if(t.url===url){
+                            found=true;
+                            foundIndex=n;
+                        }
+                    });
+                    if(found){
+                        this.list.splice(foundIndex,1)
+                    }
+                }
+                this.list.unshift({
+                    url:url,
+                    date:Date.now()
+                });
+                if(this.list.length>50){
+                    this.list.pop();
+                }
+                this.save();
+                jump(url);
+            }
+        }
+    });
+</script>
+</body>
+</html>
+  
+    </div> 
+
+    
+        <!-- Division Line -->
+        <div class="division"></div> 
+    
+
+    <div class="post-info-wrapper">
+            
+    </div>
+</article>
+
+
+    
+
+            </main>
+
+            <!-- 'To Top' Btn-->
+            
+                <div id="to-top">
+    <a href="#top" class="toTop">
+        <i class="fa fa-pagelines"></i>
+    </a>
+</div>
+            
+
+            <!-- Footer -->
+            
+                <footer class="footer-wrapper col-xs-12 col-sm-12">
+    <div class="footer-banner-wrapper">
+        <p class="footer-banner">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/" title="Hexo">Hexo</a></p>
+        <P class="footer-banner">Theme <a target="_blank" rel="noopener" href="https://github.com/Lonezj/hexo-theme-wind" title="Wind">wind</a></P>
+    </div>
+</footer>
+            
+        </div>
+
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="/css/google-prettify-monokai.css" type="text/css">
+        <script src="//cdn.bootcss.com/prettify/r298/prettify.min.js" type="text/javascript"></script>
+    </body>
+</html>
