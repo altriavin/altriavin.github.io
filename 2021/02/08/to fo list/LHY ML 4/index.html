@@ -8,6 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
   <meta name="description" content="Classification: Probabilistic Generative Model
+Take a example, input a pokemon, and output the Pokémon&#39;s type, as Figure 1 follow.
+
+
+Figure 1: the example of Classification
 ">
   
   
@@ -66,7 +70,29 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="classification-probabilistic-generative-model">Classification: Probabilistic Generative Model</h3>
+        <h2 id="classification-probabilistic-generative-model">Classification: Probabilistic Generative Model</h2>
+<p>Take a example, input a pokemon, and output the Pokémon's type, as Figure 1 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112161621024.png" /></p>
+<center>
+Figure 1: the example of Classification
+</center>
+<span id="more"></span>
+<p>So, how to do this?</p>
+<p>First, we need to numericalize Pokémon and then, we can use Pokémon as input to the function. To every Pokémon, we can use a vector which has 7 value(<strong>Total, HP, Attack, Defense, SP Atk, SP Def and Speed</strong>) to describe it.</p>
+<h3 id="training-data-for-classification">Training data for Classification</h3>
+<p>The training data is just a pair, like <span class="math inline">\((x_1, \hat{y_1})\)</span>, the <span class="math inline">\(x_1\)</span> is a Pokémon and the output is the Pokémon's type.</p>
+<h3 id="idea-1-classification-as-regression">Idea 1: Classification as Regression?</h3>
+<p>We can take binary classification as example, assuming the Pokémon has just two type.</p>
+<ul>
+<li>In training step, we define the class 1 means the target is 1 and the class 2 means the target is -1.</li>
+<li>In testing step, if the predictive value is closer to 1, the class is 1; if it is closer to -1, the class is 2.</li>
+</ul>
+<p>If you are luck, the data is very good, you will get the straight line, that is <span class="math inline">\(b + w_1 x_1 + w_2x_2 = 0\)</span> , as shown on the left side of Figure 2. Unfortunately, the data is always bad. Like the right of Figure 2, there are some data that predictive value is much greater than 1, and there data will be error.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112161653516.png" /></p>
+<center>
+Figure 2: the example of Idea 1
+</center>
+<p>Obviously, this idea is not feasible.</p>
 
       
     </div>
@@ -80,7 +106,7 @@
     
 <nav id="article-nav">
   
-    <a href="../../../../11/21/LHY%20ML%201/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../regression%20example%20--%20COVID19/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -89,15 +115,6 @@
       </div>
     </a>
   
-  
-    <a href="../regression%20example%20--%20COVID19/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
 </nav>
 
