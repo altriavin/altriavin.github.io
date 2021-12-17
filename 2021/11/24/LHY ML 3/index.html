@@ -8,7 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
   <meta name="description" content="learning of the pytorch
-figure 1: Overview of the DNN Training Procedure">
+
+
+figure 1: Overview of the DNN Training Procedure
+">
   
   
   
@@ -66,128 +69,156 @@ figure 1: Overview of the DNN Training Procedure">
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="learning-of-the-pytorch"><a href="#learning-of-the-pytorch" class="headerlink" title="learning of the pytorch"></a>learning of the pytorch</h2><p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101439805.jpeg"></p>
-<center>figure 1: Overview of the DNN Training Procedure</center>
-
+        <h2 id="learning-of-the-pytorch">learning of the pytorch</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101439805.jpeg" /></p>
+<center>
+figure 1: Overview of the DNN Training Procedure
+</center>
 <span id="more"></span>
-
-<h3 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h3><p>Tensor is a high-dimensional matrix, as Figure 2 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101444873.png"></p>
-<center>Figure 2: Tensor</center>
-
-<h4 id="Shape-of-Tensors"><a href="#Shape-of-Tensors" class="headerlink" title="Shape of Tensors"></a>Shape of Tensors</h4><p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101447502.png"></p>
-<center>Figure 2: Shape of Tensors</center>
-
+<h3 id="tensor">Tensor</h3>
+<p>Tensor is a high-dimensional matrix, as Figure 2 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101444873.png" /></p>
+<center>
+Figure 2: Tensor
+</center>
+<h4 id="shape-of-tensors">Shape of Tensors</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101447502.png" /></p>
+<center>
+Figure 2: Shape of Tensors
+</center>
 <p>We need to notice that <strong>dim</strong> in PyTorch == <strong>axis</strong> in Numpy.</p>
-<h4 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">1</span>, -<span class="number">1</span>], [-<span class="number">1</span>, <span class="number">1</span>]) <span class="comment">#construct tensor from list</span></span><br><span class="line">x = torch.from_numpy(np.array([[<span class="number">1</span>, -<span class="number">1</span>], [-<span class="number">1</span>, <span class="number">1</span>]])) <span class="comment">#construct tensor from numpy</span></span><br><span class="line">x = torch.zeros([<span class="number">2</span>, <span class="number">2</span>]) <span class="comment">#construct a 2 * 2 tensor, the value is 0</span></span><br><span class="line">x = torch.ones([<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>]) <span class="comment">#construct a 1 * 2 * 5 tensor, the value is 1</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h4><ul>
+<h4 id="constructor">Constructor</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">1</span>, -<span class="number">1</span>], [-<span class="number">1</span>, <span class="number">1</span>]) <span class="comment">#construct tensor from list</span></span><br><span class="line">x = torch.from_numpy(np.array([[<span class="number">1</span>, -<span class="number">1</span>], [-<span class="number">1</span>, <span class="number">1</span>]])) <span class="comment">#construct tensor from numpy</span></span><br><span class="line">x = torch.zeros([<span class="number">2</span>, <span class="number">2</span>]) <span class="comment">#construct a 2 * 2 tensor, the value is 0</span></span><br><span class="line">x = torch.ones([<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>]) <span class="comment">#construct a 1 * 2 * 5 tensor, the value is 1</span></span><br></pre></td></tr></table></figure>
+<h4 id="operators">Operators</h4>
+<ul>
 <li>Squzzee: remove the specified dimension with length = 1</li>
 </ul>
-<p>For example, we construct a 3-dimensional zero tensor, which size is $1 * 2 * 3$,  and the tensor as Figure 3 follow, after perform the follow code.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101541412.png"></p>
-<center>Figure 3</center>
-
+<p>For example, we construct a 3-dimensional zero tensor, which size is <span class="math inline">\(1 * 2 * 3\)</span>, and the tensor as Figure 3 follow, after perform the follow code.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101541412.png" /></p>
+<center>
+Figure 3
+</center>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x.squeeze(<span class="number">0</span>) <span class="comment">#0 means dim = 0</span></span><br></pre></td></tr></table></figure>
-
-<p>and then, the tensor will be 2-dimensional and its size is $2 * 3$, as figure 4 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101541446.png"></p>
-<center>Figure 4</center>
-
+<p>and then, the tensor will be 2-dimensional and its size is <span class="math inline">\(2 * 3\)</span>, as figure 4 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101541446.png" /></p>
+<center>
+Figure 4
+</center>
 <ul>
 <li>Unsqueeze: expand a new dimension</li>
 </ul>
 <p>This is a reverse operation of the squeeze, it can add a dimension to the tensor.</p>
-<p>For example, we construct a tensor which size is $2 * 3$, and perform the follow code, we will get a tensor which size is $2 * 1 * 3$.</p>
+<p>For example, we construct a tensor which size is <span class="math inline">\(2 * 3\)</span>, and perform the follow code, we will get a tensor which size is <span class="math inline">\(2 * 1 * 3\)</span>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.zero([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">x = x.unsqueeze(<span class="number">1</span>) <span class="comment">#1 represent the first dimension.</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Transpose: transpose two specified dimensions.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.zero([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">x = x.transpose(<span class="number">0</span>, <span class="number">1</span>) <span class="comment">#0 and 1 represent the 0th dimension and 1st dimension.</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Cat: concatenate multiple tensors</li>
 </ul>
-<p>For example, we construct three tensors, which size is $2 * 1 * 3$, $2 * 3 * 3$ and $2 * 2 * 3$ respectively, and run the follo code,</p>
+<p>For example, we construct three tensors, which size is <span class="math inline">\(2 * 1 * 3\)</span>, <span class="math inline">\(2 * 3 * 3\)</span> and <span class="math inline">\(2 * 2 * 3\)</span> respectively, and run the follo code,</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = torch.zeros([<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = torch.zeros([<span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line">z = torch.zeros([<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">w = torch.cat([x, y, z], dim=<span class="number">1</span>) <span class="comment">#dim=1 means concatenate the 1st dimension</span></span><br></pre></td></tr></table></figure>
-
-<p>the PyTorch will concatenate the three tensors to be a tensor, which size is $2 * 6 * 3$, as Figure 5 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101659851.png"></p>
-<center>Figure 5: the function of torch.Cat</center>
-
+<p>the PyTorch will concatenate the three tensors to be a tensor, which size is <span class="math inline">\(2 * 6 * 3\)</span>, as Figure 5 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101659851.png" /></p>
+<center>
+Figure 5: the function of torch.Cat
+</center>
 <ul>
 <li>Addition</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = x + y</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Subtraction</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = x - y</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Power</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = x.pow(2)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Summation</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = x.<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Mean</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = x.mean()</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Device</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = x.to(<span class="string">&#x27;cpu&#x27;</span>) <span class="comment">#use CPU</span></span><br><span class="line">torch.cuda.is_available() <span class="comment">#judge wheather GPU is.</span></span><br><span class="line">x = x.to(<span class="string">&#x27;cuda&#x27;</span>) <span class="comment">#use GPU</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="How-to-Calcuate-Gradient"><a href="#How-to-Calcuate-Gradient" class="headerlink" title="How to Calcuate Gradient"></a>How to Calcuate Gradient</h3><ol>
-<li>we construct a 2-dimension $x$, and initialize $x$ as follow.</li>
+<h3 id="how-to-calcuate-gradient">How to Calcuate Gradient</h3>
+<ol type="1">
+<li>we construct a 2-dimension <span class="math inline">\(x\)</span>, and initialize <span class="math inline">\(x\)</span> as follow.</li>
 </ol>
-<p>$$<br>x =<br>\left[<br>\begin{matrix}<br>1 &amp; 0 \<br>-1 &amp; 1 \<br>\end{matrix}<br>\right]<br>$$</p>
-<ol start="2">
+<p><span class="math display">\[
+x = 
+\left[
+\begin{matrix}
+1 &amp; 0 \\
+-1 &amp; 1 \\
+\end{matrix}
+\right]
+\]</span></p>
+<ol start="2" type="1">
 <li>compute the sum of the square</li>
 </ol>
-<p>$$<br>z = \sum_{i}\sum_{j} x_{ij}^{2}<br>$$</p>
-<ol start="3">
+<p><span class="math display">\[
+z = \sum_{i}\sum_{j} x_{ij}^{2}
+\]</span></p>
+<ol start="3" type="1">
 <li></li>
 </ol>
-<p>$$<br>\frac{\partial z}{\partial x_{ij}} = 2x_{ij}<br>$$</p>
-<ol start="4">
+<p><span class="math display">\[
+\frac{\partial z}{\partial x_{ij}} = 2x_{ij}
+\]</span></p>
+<ol start="4" type="1">
 <li></li>
 </ol>
-<p>$$<br>\frac{\partial z}{\partial x} =<br>\left[<br>\begin{matrix}<br>2 &amp; 0 \<br>-2 &amp; 2 \<br>\end{matrix}<br>\right]<br>$$</p>
-<p>Using PyTorch, we can compute the gradient of $x$ by follow code.</p>
+<p><span class="math display">\[
+\frac{\partial z}{\partial x} = 
+\left[
+\begin{matrix}
+2 &amp; 0 \\
+-2 &amp; 2 \\
+\end{matrix}
+\right]
+\]</span></p>
+<p>Using PyTorch, we can compute the gradient of <span class="math inline">\(x\)</span> by follow code.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([[<span class="number">1.</span>, <span class="number">0</span>], [-<span class="number">1.</span>, <span class="number">1.</span>]], requires_grad=<span class="literal">True</span>)</span><br><span class="line">z = x.<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>()</span><br><span class="line">z.backward() <span class="comment">#compute the gradient</span></span><br><span class="line"><span class="built_in">print</span>(x.grad)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Dataset-amp-Dataloader"><a href="#Dataset-amp-Dataloader" class="headerlink" title="Dataset &amp; Dataloader"></a>Dataset &amp; Dataloader</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span>(<span class="params">Dataset</span>):</span></span><br><span class="line">    <span class="comment">#Read data and preprocess</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__int__</span>(<span class="params">self, file</span>):</span></span><br><span class="line">        self.data = torch.tensor([[<span class="number">1.</span>, <span class="number">0</span>], [-<span class="number">1.</span>, <span class="number">1.</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="comment">#returns one sample at a time</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.data[index]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#returns the size of the dataset</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br><span class="line"></span><br><span class="line">dataset = MyDataset(file)</span><br><span class="line"></span><br><span class="line"><span class="comment">#shuffle respresents Whether to disturb the order of the dataset</span></span><br><span class="line"><span class="comment">#if the dataset is train data, we need to set shffle to True,</span></span><br><span class="line"><span class="comment">#else the shuffle should be false.</span></span><br><span class="line">dataloader = DataLoader(dataset, batch_size=<span class="number">64</span>, shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="torch-nn-–-Neural-Network-Layers"><a href="#torch-nn-–-Neural-Network-Layers" class="headerlink" title="torch.nn – Neural Network Layers"></a>torch.nn – Neural Network Layers</h3><h4 id="Linear-Layer-Fully-connected-Layer"><a href="#Linear-Layer-Fully-connected-Layer" class="headerlink" title="Linear Layer(Fully-connected Layer)"></a>Linear Layer(Fully-connected Layer)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.nn.Linear(in_features, out_features)</span><br></pre></td></tr></table></figure>
-
-<p>$in_features$ and $out_features$ means that the input tensor’s can be any shape but  the last dimension must be $in_features$, as the same, the output tensor’s last dimension must be $out_features$, as the Figure 6 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101845876.png" alt="image-20211210184550825"></p>
-<center>Figure 6: the example of the nn.Linear() </center>
-
-<h4 id="Activation-Function"><a href="#Activation-Function" class="headerlink" title="Activation Function"></a>Activation Function</h4><p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101850899.png"></p>
-<center>Figure 7: the usual Activation Function</center>
-
-<h4 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h4><p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101852754.png"></p>
-<center>Figure 8: the usual Loss Function</center>
-
-<h4 id="Build-your-own-neural-network"><a href="#Build-your-own-neural-network" class="headerlink" title="Build your own neural network"></a>Build your own neural network</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="comment">#initiallize the model and define the layers</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(MyModel, self).__init__()</span><br><span class="line">        self.net = torch.nn.Sequential(</span><br><span class="line">            torch.nn.Linear(<span class="number">10</span>, <span class="number">32</span>),</span><br><span class="line">            torch.nn.Sigmoid(),</span><br><span class="line">            torch.nn.Linear(<span class="number">32</span>, <span class="number">1</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="comment">#compute the output of the nn</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.net(x)</span><br></pre></td></tr></table></figure>
-
-<h4 id="torch-optim-–-optimization-algorithms-for-neural-networks-gradient-descent"><a href="#torch-optim-–-optimization-algorithms-for-neural-networks-gradient-descent" class="headerlink" title="torch.optim – optimization algorithms for neural networks(gradient descent)"></a>torch.optim – optimization algorithms for neural networks(gradient descent)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.optim.SGD(params, lr, momentum = <span class="number">0</span>) <span class="comment">#params is model.parameters</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Neural-Network-Training"><a href="#Neural-Network-Training" class="headerlink" title="Neural Network Training"></a>Neural Network Training</h3><p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101912194.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101913633.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101914928.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101914335.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101915376.png"></p>
+<h3 id="dataset-dataloader">Dataset &amp; Dataloader</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span>(<span class="params">Dataset</span>):</span></span><br><span class="line">    <span class="comment">#Read data and preprocess</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__int__</span>(<span class="params">self, file</span>):</span></span><br><span class="line">        self.data = torch.tensor([[<span class="number">1.</span>, <span class="number">0</span>], [-<span class="number">1.</span>, <span class="number">1.</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="comment">#returns one sample at a time</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.data[index]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#returns the size of the dataset</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br><span class="line"></span><br><span class="line">dataset = MyDataset(file)</span><br><span class="line"></span><br><span class="line"><span class="comment">#shuffle respresents Whether to disturb the order of the dataset</span></span><br><span class="line"><span class="comment">#if the dataset is train data, we need to set shffle to True,</span></span><br><span class="line"><span class="comment">#else the shuffle should be false.</span></span><br><span class="line">dataloader = DataLoader(dataset, batch_size=<span class="number">64</span>, shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="torch.nn----neural-network-layers">torch.nn -- Neural Network Layers</h3>
+<h4 id="linear-layerfully-connected-layer">Linear Layer(Fully-connected Layer)</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.nn.Linear(in_features, out_features)</span><br></pre></td></tr></table></figure>
+<p><span class="math inline">\(in\_features\)</span> and <span class="math inline">\(out\_features\)</span> means that the input tensor's can be any shape but the last dimension must be <span class="math inline">\(in\_features\)</span>, as the same, the output tensor's last dimension must be <span class="math inline">\(out\_features\)</span>, as the Figure 6 follow.</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101845876.png" alt="image-20211210184550825" /><figcaption aria-hidden="true">image-20211210184550825</figcaption>
+</figure>
+<center>
+Figure 6: the example of the nn.Linear()
+</center>
+<h4 id="activation-function">Activation Function</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101850899.png" /></p>
+<center>
+Figure 7: the usual Activation Function
+</center>
+<h4 id="loss-function">Loss Function</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101852754.png" /></p>
+<center>
+Figure 8: the usual Loss Function
+</center>
+<h4 id="build-your-own-neural-network">Build your own neural network</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="comment">#initiallize the model and define the layers</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(MyModel, self).__init__()</span><br><span class="line">        self.net = torch.nn.Sequential(</span><br><span class="line">            torch.nn.Linear(<span class="number">10</span>, <span class="number">32</span>),</span><br><span class="line">            torch.nn.Sigmoid(),</span><br><span class="line">            torch.nn.Linear(<span class="number">32</span>, <span class="number">1</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="comment">#compute the output of the nn</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.net(x)</span><br></pre></td></tr></table></figure>
+<h4 id="torch.optim----optimization-algorithms-for-neural-networksgradient-descent">torch.optim -- optimization algorithms for neural networks(gradient descent)</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.optim.SGD(params, lr, momentum = <span class="number">0</span>) <span class="comment">#params is model.parameters</span></span><br></pre></td></tr></table></figure>
+<h3 id="neural-network-training">Neural Network Training</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101912194.png" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101913633.png" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101914928.png" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101914335.png" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112101915376.png" /></p>
 
       
     </div>
