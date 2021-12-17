@@ -8,11 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
   <meta name="description" content="Classification: Probabilistic Generative Model
-Take a example, input a Pokémon, and output the Pokémon&#39;s type, as Figure 1 follow.
+Take a example, input a Pokémon, and output the Pokémon’s type, as Figure 1 follow.
 
-
-Figure 1: the example of Classification
-">
+Figure 1: the example of Classification">
   
   
   
@@ -70,88 +68,69 @@ Figure 1: the example of Classification
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="classification-probabilistic-generative-model">Classification: Probabilistic Generative Model</h2>
-<p>Take a example, input a Pokémon, and output the Pokémon's type, as Figure 1 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112161621024.png" /></p>
-<center>
-Figure 1: the example of Classification
-</center>
+        <h2 id="classification:-probabilistic generative model">Classification: Probabilistic Generative Model</h2>
+<p>Take a example, input a Pokémon, and output the Pokémon’s type, as Figure 1 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112161621024.png" alt=""></p>
+<center>Figure 1: the example of Classification</center>
 <span id="more"></span>
 <p>So, how to do this?</p>
 <p>First, we need to numericalize Pokémon and then, we can use Pokémon as input to the function. To every Pokémon, we can use a vector which has 7 value(<strong>Total, HP, Attack, Defense, SP Atk, SP Def and Speed</strong>) to describe it.</p>
-<h3 id="training-data-for-classification">Training data for Classification</h3>
-<p>The training data is just a pair, like <span class="math inline">\((x_1, \hat{y_1})\)</span>, the <span class="math inline">\(x_1\)</span> is a Pokémon and the output is the Pokémon's type.</p>
-<h3 id="idea-1-classification-as-regression">Idea 1: Classification as Regression?</h3>
+<h3 id="training-data for classification">Training data for Classification</h3>
+<p>The training data is just a pair, like <span class="markdown-them-math-inline">$(x_1, \hat{y_1})$</span>, the <span class="markdown-them-math-inline">$x_1$</span> is a Pokémon and the output is the Pokémon’s type.</p>
+<h3 id="idea-1: classification as regression?">Idea 1: Classification as Regression?</h3>
 <p>We can take binary classification as example, assuming the Pokémon has just two type.</p>
 <ul>
 <li>In training step, we define the class 1 means the target is 1 and the class 2 means the target is -1.</li>
 <li>In testing step, if the predictive value is closer to 1, the class is 1; if it is closer to -1, the class is 2.</li>
 </ul>
-<p>If you are luck, the data is very good, you will get the straight line, that is <span class="math inline">\(b + w_1 x_1 + w_2x_2 = 0\)</span> , as shown on the left side of Figure 2. Unfortunately, the data is always bad. Like the right of Figure 2, there are some data that predictive value is much greater than 1, and there data will be error. After training, we will get the purple line, not the green line.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112161653516.png" /></p>
-<center>
-Figure 2: the example of Idea 1
-</center>
+<p>If you are luck, the data is very good, you will get the straight line, that is  <span class="markdown-them-math-inline">$b + w_1 x_1 + w_2x_2 = 0$</span> , as shown on the left side of Figure 2. Unfortunately, the data is always bad. Like the right of Figure 2, there are some data that predictive value is much greater than 1, and there data will be error. After training, we will get the purple line, not the green line.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112161653516.png" alt=""></p>
+<center>Figure 2: the example of Idea 1</center>
 <p>Obviously, this idea is not feasible.</p>
 <h3 id="ideal-alternatives">Ideal Alternatives</h3>
 <p>The ideal alternatives as Figure 3 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112170918778.png" /></p>
-<center>
-Figure 3: Ideal Alternatives
-</center>
-<h3 id="probability-theory-based-method">Probability Theory-based Method</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112170918778.png" alt=""></p>
+<center>Figure 3: Ideal Alternatives</center>
+<h3 id="probability-theory-based method">Probability Theory-based Method</h3>
 <h4 id="two-boxes">Two Boxes</h4>
 <p>Supposing there are two boxes, Box1 has four blue ball and one green ball, Box2 has two blue ball and two green ball, as Figure 4 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112170931636.png" /></p>
-<center>
-Figure 4: Two Boxes
-</center>
-<p>Now, we know that the probability of getting a ball from Box1 is <span class="math inline">\(P(B_1) = \frac{2}{3}\)</span>, and Box2 is <span class="math inline">\(P(B_2) = \frac{1}{3}\)</span>, <span class="math inline">\(P(Blue|B_1) = \frac{4}{5}\)</span>, <span class="math inline">\(P(Green|B_1) = \frac{1}{5}\)</span>, <span class="math inline">\(P(Blue|B_2) = \frac{2}{5}\)</span>, <span class="math inline">\(P(Green|B_2) = \frac{3}{5}\)</span>.</p>
-<p>And then, we can get the probability of getting a blue ball, and it comes from Box1 is <span class="math display">\[
-P(B_1|Blue) = \frac{P(Blue|B_1)P(B_1)}{P(Blue|B_1)P(B_1) + P(Blue|B_2)P(B_2)}
-\]</span></p>
-<h4 id="two-class">Two Class</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112170931636.png" alt=""></p>
+<center>Figure 4: Two Boxes</center>
+<p>Now, we know that the probability of getting a ball from Box1 is <span class="markdown-them-math-inline">$P(B_1) = \frac{2}{3}$</span>, and  Box2 is <span class="markdown-them-math-inline">$P(B_2) = \frac{1}{3}$</span>, <span class="markdown-them-math-inline">$P(Blue|B_1) = \frac{4}{5}$</span>, <span class="markdown-them-math-inline">$P(Green|B_1) = \frac{1}{5}$</span>, <span class="markdown-them-math-inline">$P(Blue|B_2) = \frac{2}{5}$</span>, <span class="markdown-them-math-inline">$P(Green|B_2) = \frac{3}{5}$</span>.</p>
+<p>And then, we can get the probability of getting a blue ball, and it comes from Box1 is</p>
+<div class="markdown-them-math-block">$$P(B_1|Blue) = \frac{P(Blue|B_1)P(B_1)}{P(Blue|B_1)P(B_1) + P(Blue|B_2)P(B_2)}
+$$</div><h4 id="two-class">Two Class</h4>
 <p>Now, we can replace the box to class as Figure 5 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112170944492.png" /></p>
-<center>
-Figure 5: Two Class
-</center>
-<p>Now, the problem is given an <span class="math inline">\(x\)</span>, which class does it belong to?</p>
-<p>Like Two Boxes, we can get the probablity of <span class="math inline">\(x\)</span> belongs to Class 1 is <span class="math display">\[
-P(C_1|x) = \frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1) + P(x|C_2)P(C_2)}
-\]</span> And we need to estimating the probabilities from training data to get <span class="math inline">\(P(C_1)\)</span> and others.</p>
-<p>And all the idea is called <strong>Generative Model</strong> <span class="math display">\[
-P(x) = P(x|C_1)P(C_1) + P(x|C_2)P(C_2)
-\]</span></p>
-<h4 id="gaussian-distribution">Gaussian Distribution</h4>
-<p><span class="math display">\[
-f_{\mu \Sigma}(x) = \frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\Sigma|^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu)^{T} \Sigma ^{-1} (x - \mu)}
-\]</span></p>
-<p>The formula of Gaussian distribution as above. The input is a vector <span class="math inline">\(x\)</span>, and the output is the probability of sampling <span class="math inline">\(x\)</span>.</p>
-<p>The shape of the function determines by <strong>mean <span class="math inline">\(\mu\)</span></strong> and <strong>convariance matrix <span class="math inline">\(\Sigma\)</span></strong> as Figure 6 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171111823.png" /></p>
-<center>
-Figure 6: the shape of the function on difficult <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sum\)</span>
-</center>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112170944492.png" alt=""></p>
+<center>Figure 5: Two Class</center>
+<p>Now, the problem is given an <span class="markdown-them-math-inline">$x$</span>, which class does it belong to?</p>
+<p>Like Two Boxes, we can get the probablity of <span class="markdown-them-math-inline">$x$</span> belongs to Class 1 is</p>
+<div class="markdown-them-math-block">$$P(C_1|x) = \frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1) + P(x|C_2)P(C_2)}
+$$</div><p>And we need to estimating the probabilities from training data to get <span class="markdown-them-math-inline">$P(C_1)$</span> and others.</p>
+<p>And all the idea is called <strong>Generative Model</strong></p>
+<div class="markdown-them-math-block">$$P(x) = P(x|C_1)P(C_1) + P(x|C_2)P(C_2)
+$$</div><h4 id="gaussian-distribution">Gaussian Distribution</h4>
+<div class="markdown-them-math-block">$$f_{\mu \Sigma}(x) = \frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\Sigma|^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu)^{T} \Sigma ^{-1} (x - \mu)}
+$$</div><p>The formula of Gaussian distribution as above. The input is a vector <span class="markdown-them-math-inline">$x$</span>, and the output is the probability of sampling <span class="markdown-them-math-inline">$x$</span>.</p>
+<p>The shape of the function determines by <strong>mean <span class="markdown-them-math-inline">$\mu$</span></strong> and <strong>convariance matrix <span class="markdown-them-math-inline">$\Sigma$</span></strong> as Figure 6 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171111823.png" alt=""></p>
+<center>Figure 6: the shape of the function on difficult $\mu$ and $\sum$ </center>
 <h4 id="maximum-likelihood">Maximum Likelihood</h4>
-<p>We can likelihood of a Gaussian with <strong>mean <span class="math inline">\(\mu\)</span></strong>, and convariance <strong>matrix <span class="math inline">\(\sum\)</span></strong>, and then, we will get the probability of the Gaussian samples. <span class="math display">\[
-L(\mu, \Sigma) = \prod f_{\mu, \Sigma}(x^i)
-\]</span></p>
-<h4 id="example">Example</h4>
-<p>Now, let's do a actual example. There are 79 "water" Pokémon, and 61 "Normal" Pokémon. The task is to predient a probability of a unknown Pokémon's type is "water".</p>
-<p>And use <span class="math inline">\(x^{i}\)</span> to replace the 79 "water" Pokémon. We assume <span class="math inline">\(x^{1}, x^{2}, ... , x^{79}\)</span> generate from the <strong>Gaussian</strong> <span class="math inline">\((\mu ^{\*}, \Sigma ^{\*})\)</span> with the <strong>maximum likelihood</strong>, which <span class="math display">\[
-\mu ^{\*}, \Sigma^{\*} = arg \max_{\mu, \Sigma} L(\mu, \Sigma)
-\]</span> And then, we can get the <span class="math inline">\(\mu ^{*}\)</span> is the average of <span class="math inline">\(x^{i}\)</span>. <span class="math display">\[
-\mu ^{*} = \frac{1}{79}\sum_{n=1}^{79}x^{n}
-\]</span> And the <span class="math inline">\(\Sigma ^{*}\)</span> is <span class="math display">\[
-\Sigma ^{*} = \frac{1}{79} \sum_{n=1}^{79} (x_{n} - \mu ^{*})(x_{n} - \mu ^{*}) ^ {T}
-\]</span> Take the actual value, we can compute the "Water" and "Normal" type's Pokémon. Take the <strong>Defense</strong> and <strong>SP Defense</strong>, we can get the scatter plot as Figure 7 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171335108.png" /></p>
-<center>
-Figure 7: the scatter plot of "Water" and "Normal" type's Pokémon
-</center>
-<p>And use above formula, we can compute the <span class="math inline">\(\mu ^{1}, \Sigma ^{1}\)</span> and <span class="math inline">\(\mu ^{2}, \Sigma ^{2}\)</span> as follow. <span class="math display">\[
-\mu ^{1} =
+<p>We can likelihood of a Gaussian with <strong>mean <span class="markdown-them-math-inline">$\mu$</span></strong>, and convariance <strong>matrix <span class="markdown-them-math-inline">$\sum$</span></strong>, and then, we will get the probability of the Gaussian samples.</p>
+<div class="markdown-them-math-block">$$L(\mu, \Sigma) = \prod f_{\mu, \Sigma}(x^i)
+$$</div><h4 id="example">Example</h4>
+<p>Now, let’s do a actual example. There are 79 “water” Pokémon, and 61 “Normal” Pokémon. The task is to predient a probability of  a unknown Pokémon’s type is “water”.</p>
+<p>And use <span class="markdown-them-math-inline">$x^{i}$</span> to replace the 79 “water” Pokémon. We assume <span class="markdown-them-math-inline">$x^{1}, x^{2}, ... , x^{79}$</span> generate from the <strong>Gaussian</strong> <span class="markdown-them-math-inline">$(\mu ^{/*}, \Sigma ^{/*})$</span> with the <strong>maximum likelihood</strong>, which</p>
+<div class="markdown-them-math-block">$$\mu ^{*}, \Sigma^{*} = arg \max_{\mu, \Sigma} L(\mu, \Sigma)
+$$</div><p>And then, we can get the <span class="markdown-them-math-inline">$\mu ^{*}$</span> is the average of <span class="markdown-them-math-inline">$x^{i}$</span>.</p>
+<div class="markdown-them-math-block">$$\mu ^{*} = \frac{1}{79}\sum_{n=1}^{79}x^{n}
+$$</div><p>And the <span class="markdown-them-math-inline">$\Sigma ^{*}$</span> is</p>
+<div class="markdown-them-math-block">$$\Sigma ^{*} = \frac{1}{79} \sum_{n=1}^{79} (x_{n} - \mu ^{*})(x_{n} - \mu ^{*}) ^ {T}
+$$</div><p>Take the actual value, we can compute the “Water” and “Normal” type’s Pokémon. Take the <strong>Defense</strong> and <strong>SP Defense</strong>, we can get the scatter plot as Figure 7 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171335108.png" alt=""></p>
+<center>Figure 7: the scatter plot of "Water" and "Normal" type's Pokémon</center>
+<p>And use above formula, we can compute the <span class="markdown-them-math-inline">$\mu ^{1}, \Sigma ^{1}$</span> and <span class="markdown-them-math-inline">$\mu ^{2}, \Sigma ^{2}$</span> as follow.</p>
+<div class="markdown-them-math-block">$$\mu ^{1} =
 \left[
 \begin{matrix}
 75.0 \\
@@ -166,9 +145,7 @@ Figure 7: the scatter plot of "Water" and "Normal" type's Pokémon
 327 &amp; 929
 \end{matrix}
 \right]
-\]</span></p>
-<p><span class="math display">\[
-\mu ^{2} =
+$$</div><div class="markdown-them-math-block">$$\mu ^{2} =
 \left[
 \begin{matrix}
 55.6 \\
@@ -183,78 +160,52 @@ Figure 7: the scatter plot of "Water" and "Normal" type's Pokémon
 422 &amp; 685
 \end{matrix}
 \right]
-\]</span></p>
-<p><strong>Now, let's do classification!</strong></p>
-<p>We can get the <span class="math inline">\(P(C_1)\)</span> and <span class="math inline">\(P(C_2)\)</span> as follow. <span class="math display">\[
-P(C_1) = \frac{79}{79 + 61} = 0.56
-\]</span></p>
-<p><span class="math display">\[
-P(C_2) = \frac{61}{79 + 61} = 0.44
-\]</span></p>
-<p>And use <strong>Gaussian Distribution</strong>, we can get the <span class="math inline">\(P(x|C_{1})\)</span> and <span class="math inline">\(P(x|C_2)\)</span> as follow. <span class="math display">\[
-P(x|C_{1}) = f_{\mu ^{1} \Sigma^{1}} (x)
-\]</span></p>
-<p><span class="math display">\[
-P(x|C_{2}) = f_{\mu ^{2} \Sigma ^{2}} (x)
-\]</span></p>
-<p>Then, we can compute the <span class="math inline">\(P(C_{1} | x)\)</span> as follow. <span class="math display">\[
-P(C_1 | x) = \frac{P(x|C_{1})P(C_1)}{P(x|C_{1})P(C_1) + P(x|C_{2})P(C_2)}
-\]</span> If the <span class="math inline">\(P(C_1 | x) &gt; 0.5\)</span>, we can think that <span class="math inline">\(x\)</span> Belong to Class 1(Water). The result as Figure 8 follow.The redder the curve, the more likely it belongs to class 1(water). But the accuracy is bad, just 47%.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171417541.png" /></p>
-<center>
-Figure 8: result
-</center>
+$$</div><p><strong>Now, let’s do classification!</strong></p>
+<p>We can get the <span class="markdown-them-math-inline">$P(C_1)$</span> and <span class="markdown-them-math-inline">$P(C_2)$</span> as follow.</p>
+<div class="markdown-them-math-block">$$P(C_1) = \frac{79}{79 + 61} = 0.56
+$$</div><div class="markdown-them-math-block">$$P(C_2) = \frac{61}{79 + 61} = 0.44
+$$</div><p>And use <strong>Gaussian Distribution</strong>, we can get the <span class="markdown-them-math-inline">$P(x|C_{1})$</span> and <span class="markdown-them-math-inline">$P(x|C_2)$</span> as follow.</p>
+<div class="markdown-them-math-block">$$P(x|C_{1}) = f_{\mu ^{1} \Sigma^{1}} (x)
+$$</div><div class="markdown-them-math-block">$$P(x|C_{2}) = f_{\mu ^{2} \Sigma ^{2}} (x)
+$$</div><p>Then, we can compute the <span class="markdown-them-math-inline">$P(C_{1} | x)$</span>  as follow.</p>
+<div class="markdown-them-math-block">$$P(C_1 | x) = \frac{P(x|C_{1})P(C_1)}{P(x|C_{1})P(C_1) + P(x|C_{2})P(C_2)}
+$$</div><p>If the <span class="markdown-them-math-inline">$P(C_1 | x) &gt; 0.5$</span>, we can think that <span class="markdown-them-math-inline">$x$</span> Belong to Class 1(Water). The result as Figure 8 follow.The redder the curve, the more likely it belongs to class 1(water). But the accuracy is bad, just 47%.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171417541.png" alt=""></p>
+<center>Figure 8: result</center>
 <p>If we use all the value of Pokémon, the accuracy is always bad, just 54%.</p>
-<h4 id="modifying-model-use-the-same-sigma">Modifying model: use the same <span class="math inline">\(\Sigma\)</span></h4>
-<p>The above model is bad, but the theory is good. So, we can optimize the model to get a better accuracy, for example, all the <span class="math inline">\(x\)</span> use the same <span class="math inline">\(\Sigma\)</span>, as Figure 9 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171407612.png" /></p>
-<center>
-Figure 9: the example of use the same <span class="math inline">\(\Sigma\)</span>
-</center>
-<p>And then, we need to Find <span class="math inline">\(\mu ^{1}, \mu ^{2}, \Sigma\)</span> Maximizing the likelihood <span class="math inline">\(L(\mu ^{1}, \mu ^{2}, \Sigma)\)</span>. <span class="math display">\[
-L(\mu ^{1}, \mu ^{2}, \Sigma) = \prod_{i=1}^{79} f_{\mu^{1},\Sigma}(x^{i}) \prod_{i=80}^{140}f_{\mu^{2} \Sigma}(x^i)
-\]</span> And the <span class="math inline">\(\mu ^{1}\)</span> and <span class="math inline">\(\mu ^{2}\)</span> is the same. the <span class="math inline">\(\Sigma\)</span> is <span class="math display">\[
-\Sigma = \frac{79}{140}\Sigma^{1} + \frac{61}{140} \Sigma^{2}
-\]</span> And then, the result as Figure 10 follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171419322.png" /></p>
-<center>
-Figure 10: the result of the new model
-</center>
+<h4 id="modifying-model: use the same $\sigma$">Modifying model: use the same <span class="markdown-them-math-inline">$\Sigma$</span></h4>
+<p>The above model is bad, but the theory is good. So, we can optimize the model to get a better accuracy, for example, all the <span class="markdown-them-math-inline">$x$</span> use the same <span class="markdown-them-math-inline">$\Sigma$</span>, as Figure 9 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171407612.png" alt=""></p>
+<center>Figure 9: the example of use the same $\Sigma$</center>
+<p>And then, we need to Find <span class="markdown-them-math-inline">$\mu ^{1}, \mu ^{2}, \Sigma$</span> Maximizing the likelihood <span class="markdown-them-math-inline">$L(\mu ^{1}, \mu ^{2}, \Sigma)$</span>.</p>
+<div class="markdown-them-math-block">$$L(\mu ^{1}, \mu ^{2}, \Sigma) = \prod_{i=1}^{79} f_{\mu^{1},\Sigma}(x^{i}) \prod_{i=80}^{140}f_{\mu^{2} \Sigma}(x^i)
+$$</div><p>And the <span class="markdown-them-math-inline">$\mu ^{1}$</span> and <span class="markdown-them-math-inline">$\mu ^{2}$</span> is the same. the <span class="markdown-them-math-inline">$\Sigma$</span> is</p>
+<div class="markdown-them-math-block">$$\Sigma = \frac{79}{140}\Sigma^{1} + \frac{61}{140} \Sigma^{2}
+$$</div><p>And then, the result as Figure 10 follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202112171419322.png" alt=""></p>
+<center>Figure 10: the result of the new model</center>
 <p>We can see that the boundary is linear!</p>
 <p>If we use all the feature, we will get 73% accuracy instead of 54%!</p>
 <h4 id="posterior-probability">Posterior Probability</h4>
-<p><span class="math display">\[
-P(C_{1}|x) = \frac{P(x|C_{1}) P(C_{1})}{P(x|C_{1}) P(C_{1}) + P(x|C_{2}) P(C_{2})} = \frac{1}{1 + \frac{P(x|C_{2})P(C_{2})}{P(x|C_{1})P(C_{1})}}
-\]</span></p>
-<p>And define <span class="math inline">\(z\)</span>, its value is <span class="math display">\[
-z = ln \frac {P(x|C_{1}) P(C_{1})}{P(x|C_{2}) P(C_{2})}
-\]</span> So, the <span class="math inline">\(P(C_{1} | x)\)</span> is here. <span class="math display">\[
-P(C_{1} | x) = \frac{1}{1 + e^{-z}} = \sigma (z)
-\]</span> We can further simplify <span class="math inline">\(z\)</span>. <span class="math display">\[
-z = ln \frac{P(x|C_{1})}{P(x|C_{2})} + ln \frac{P(C_{1})}{P(C_{2})}
-\]</span></p>
-<p><span class="math display">\[
-ln \frac{P(C_{1})}{P({C_{2}})} = ln \frac{\frac{N_1}{N_1 + N_2}}{\frac{N_{2}}{N_{1} + N_{2}}} = ln \frac{N_{1}}{N_{2}}
-\]</span></p>
-<p><span class="math display">\[
-P(x|C_{1}) = \frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\Sigma ^{1}|^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu ^{1})^{T} (\Sigma ^{1}) ^{-1} (x - \mu ^{1})}
-\]</span></p>
-<p><span class="math display">\[
-P(x|C_{1}) = \frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\Sigma ^{2}|^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu ^{2})^{T} (\Sigma ^{2}) ^{-1} (x - \mu ^{2})}
-\]</span></p>
-<p>Remember? we use the same <span class="math inline">\(\Sigma\)</span>, and <span class="math inline">\(\Sigma ^{1} = \Sigma ^{2} = \Sigma\)</span>. And we can simplify the <span class="math inline">\(z\)</span> as follow. <span class="math display">\[
-z = (\mu ^{1} - \mu ^{2})^{T} \Sigma ^{-1} x - \frac{1}{2}(\mu ^{1})^{T}\Sigma ^{-1} \mu ^{1} + \frac{1}{2} (\mu ^{2}) ^{T}(\Sigma^{2})^{-1} \mu ^{2} + ln \frac{N_{1}}{N_{2}}
-\]</span> It's very long and complex formula, but to be easy. As we all know, <span class="math inline">\(\mu ^{1}, \mu^ {2}, \Sigma\)</span> is constant.</p>
-<p>So, we can define <span class="math inline">\(W^{T}\)</span> and <span class="math inline">\(b\)</span> as follow. <span class="math display">\[
-W^{T} = (\mu ^{1} - \mu ^{2})^{T} \Sigma^{-1}
-\]</span></p>
-<p><span class="math display">\[
-b = - \frac{1}{2}(\mu ^{1})^{T}\Sigma ^{-1} \mu ^{1} + \frac{1}{2} (\mu ^{2}) ^{T}(\Sigma^{2})^{-1} \mu ^{2} + ln \frac{N_{1}}{N_{2}}
-\]</span></p>
-<p>Surprise? We can get <span class="math inline">\(P(C_{1}|x)\)</span> as follow. <span class="math display">\[
-P(C_{1}|x) = \sigma (w * x + b)
-\]</span></p>
-<h3 id="logistic-regression">Logistic Regression</h3>
+<div class="markdown-them-math-block">$$P(C_{1}|x) = \frac{P(x|C_{1}) P(C_{1})}{P(x|C_{1}) P(C_{1}) + P(x|C_{2}) P(C_{2})} = \frac{1}{1 + \frac{P(x|C_{2})P(C_{2})}{P(x|C_{1})P(C_{1})}}
+$$</div><p>And define <span class="markdown-them-math-inline">$z$</span>, its value is</p>
+<div class="markdown-them-math-block">$$z = ln \frac {P(x|C_{1}) P(C_{1})}{P(x|C_{2}) P(C_{2})}
+$$</div><p>So, the <span class="markdown-them-math-inline">$P(C_{1} | x)$</span> is here.</p>
+<div class="markdown-them-math-block">$$P(C_{1} | x) = \frac{1}{1 + e^{-z}} = \sigma (z)
+$$</div><p>We can further simplify <span class="markdown-them-math-inline">$z$</span>.</p>
+<div class="markdown-them-math-block">$$z = ln \frac{P(x|C_{1})}{P(x|C_{2})} + ln \frac{P(C_{1})}{P(C_{2})}
+$$</div><div class="markdown-them-math-block">$$ln \frac{P(C_{1})}{P({C_{2}})} = ln \frac{\frac{N_1}{N_1 + N_2}}{\frac{N_{2}}{N_{1} + N_{2}}} = ln \frac{N_{1}}{N_{2}}
+$$</div><div class="markdown-them-math-block">$$P(x|C_{1}) = \frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\Sigma ^{1}|^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu ^{1})^{T} (\Sigma ^{1}) ^{-1} (x - \mu ^{1})}
+$$</div><div class="markdown-them-math-block">$$P(x|C_{1}) = \frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\Sigma ^{2}|^{\frac{1}{2}}} e^{-\frac{1}{2}(x-\mu ^{2})^{T} (\Sigma ^{2}) ^{-1} (x - \mu ^{2})}
+$$</div><p>Remember? we use the same <span class="markdown-them-math-inline">$\Sigma$</span>, and <span class="markdown-them-math-inline">$\Sigma ^{1} = \Sigma ^{2} = \Sigma$</span>. And we can simplify the <span class="markdown-them-math-inline">$z$</span> as follow.</p>
+<div class="markdown-them-math-block">$$z = (\mu ^{1} - \mu ^{2})^{T} \Sigma ^{-1} x - \frac{1}{2}(\mu ^{1})^{T}\Sigma ^{-1} \mu ^{1} + \frac{1}{2} (\mu ^{2}) ^{T}(\Sigma^{2})^{-1} \mu ^{2} + ln \frac{N_{1}}{N_{2}}
+$$</div><p>It’s very long and complex formula, but to be easy. As we all know, <span class="markdown-them-math-inline">$\mu ^{1}, \mu^ {2}, \Sigma$</span> is constant.</p>
+<p>So, we can define <span class="markdown-them-math-inline">$W^{T}$</span> and <span class="markdown-them-math-inline">$b$</span> as follow.</p>
+<div class="markdown-them-math-block">$$W^{T} = (\mu ^{1} - \mu ^{2})^{T} \Sigma^{-1}
+$$</div><div class="markdown-them-math-block">$$b = - \frac{1}{2}(\mu ^{1})^{T}\Sigma ^{-1} \mu ^{1} + \frac{1}{2} (\mu ^{2}) ^{T}(\Sigma^{2})^{-1} \mu ^{2} + ln \frac{N_{1}}{N_{2}}
+$$</div><p>Surprise? We can get <span class="markdown-them-math-inline">$P(C_{1}|x)$</span> as follow.</p>
+<div class="markdown-them-math-block">$$P(C_{1}|x) = \sigma (w * x + b)
+$$</div><h3 id="logistic-regression">Logistic Regression</h3>
 
       
     </div>
