@@ -67,105 +67,65 @@
       
         <p>In the second lesson, he detailly tell how to use a more flexible model to fit a complicated curve.</p>
 <span id="more"></span>
-<p>The linear model has severe limitation. If the curve is the red line as figure 1, whatever we adjust the <span class="markdown-them-math-inline">$w$</span> and <span class="markdown-them-math-inline">$b$</span>, we can not get this curve. So, we need a more flexible model.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20complicate%20curve%20about%20y%20and%20$x_1$.jpeg" alt=""></p>
+
+<p>The linear model has severe limitation. If the curve is the red line as figure 1, whatever we adjust the $w$ and $b$, we can not get this curve. So, we need a more flexible model.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20complicate%20curve%20about%20y%20and%20$x_1$.jpeg"></p>
 <center>fig 1: the complicate curve about y and $x_1$</center>
+
 <p>In that case, we can get the red curve = constant + sum of the blue line as figure 2.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20way%20to%20get%20the%20blue%20line.jpeg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20way%20to%20get%20the%20blue%20line.jpeg"></p>
 <center>fig 2: the way to get the blue line</center>
+
 <p>And all piecewise linear curves can be structure using many blue line and a constant.</p>
-<p>But how to write the formula of this blue function? Maybe it is not so easy to write it out directly. But we can use a curve to approximate it, such as the Sigmoid function. The Sigmoid function’s formula and the curve as follow.</p>
-<div class="markdown-them-math-block">$$y = c \frac{1}{1 + e^{-(b+wx_1)}} =c sigmoid(b+wx_1)
-$$</div><p>and by adjusting the <span class="markdown-them-math-inline">$b$</span>, <span class="markdown-them-math-inline">$w$</span> And <span class="markdown-them-math-inline">$c$</span>, we can get the different curve as figure 3.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20curve%20of%20different%20b,%20w%20and%20c.jpeg" alt=""></p>
+<p>But how to write the formula of this blue function? Maybe it is not so easy to write it out directly. But we can use a curve to approximate it, such as the Sigmoid function. The Sigmoid function’s formula and the curve as follow.<br>$$<br>y = c \frac{1}{1 + e^{-(b+wx_1)}} =c sigmoid(b+wx_1)<br>$$<br>and by adjusting the $b$, $w$ And $c$, we can get the different curve as figure 3.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20curve%20of%20different%20b,%20w%20and%20c.jpeg"></p>
 <center>fig 3: the curve of different b, w and c</center>
-<p>Now, back to figure 2, we can use formula <span class="markdown-them-math-inline">$c1 sigmoid(b_1+w_1x_1)$</span> to represent blue curve 1, the blue curve 2 and blue curve 3 are in this form. So we can represent the red curve in figure 2 using follow formula:</p>
-<div class="markdown-them-math-block">$$red\ \ curve = b + \sum c_isigmoid(b_i+w_ix_1)
-$$</div><p>And the formula can be used to all piecewise linear curves.</p>
-<p>And then, we can add more features to obtain a new model. If we consider first 28 day, we can get the formula:</p>
-<div class="markdown-them-math-block">$$y = b + \sum_{j} w_j x_j
-$$</div><p>And replace the items in Sigmoid, we can get the follow formula.</p>
-<div class="markdown-them-math-block">$$y = b + \sum_{i} c_i sigmoid(b_i + \sum_{j}w_{ij} x_j)
-$$</div><p>which <span class="markdown-them-math-inline">$w_{ij}$</span> represent the weight for <span class="markdown-them-math-inline">$x_j$</span> for <span class="markdown-them-math-inline">$i-th$</span> sigmoid.</p>
-<p>And then, we define <span class="markdown-them-math-inline">$r_i = sigmoid(b_i + \sum_{j}w_{ij}x_{j})$</span>, and let <span class="markdown-them-math-inline">$i: 1, 2, 3$</span> and <span class="markdown-them-math-inline">$j: 1, 2, 3$</span>. and then, we can get the formula as follow.</p>
-<div class="markdown-them-math-block">$$r_1 = b_1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3
-$$</div><div class="markdown-them-math-block">$$r2 = b_2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3
-$$</div><div class="markdown-them-math-block">$$r3 = b_3 + w_{31}x_1 + w_{32}x_2 + x_{33}x_3
-$$</div><p>We can change the above formula to matrix operations.</p>
-<div class="markdown-them-math-block">$$\begin{bmatrix} r_1 \\ r_2 \\ r_3 \end{bmatrix} = 
-\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix} +
-\begin{bmatrix} 
-w_{11}\ \ w_{12}\ \ w_{13} \\
-w_{21}\ \ w_{22}\ \ w_{23} \\
-w_{31}\ \ w_{32}\ \ w_{33} \\
-\end{bmatrix}
-\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
-$$</div><p>And then, by changing the matrix to vertor, we can get the formula as follow:</p>
-<div class="markdown-them-math-block">$$\vec r = \vec b + W \vec x
-$$</div><p>After that, we define <span class="markdown-them-math-inline">$a_i = \sigma(r_i), i=1,2,3$</span>, which <span class="markdown-them-math-inline">$\sigma()$</span> is the sigmoid operation. Finally, using the sum of <span class="markdown-them-math-inline">$c_i \times a_i$</span> and add the <span class="markdown-them-math-inline">$b$</span>, the <span class="markdown-them-math-inline">$y$</span> obtained. The complete process as figure 4.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/The%20complete%20process%20of%20calculation.PNG" alt=""></p>
+
+<p>Now, back to figure 2, we can use formula $c1 sigmoid(b_1+w_1x_1)$ to represent blue curve 1, the blue curve 2 and blue curve 3 are in this form. So we can represent the red curve in figure 2 using follow formula:<br>$$<br>red\ \ curve = b + \sum c_isigmoid(b_i+w_ix_1)<br>$$<br>And the formula can be used to all piecewise linear curves.</p>
+<p>And then, we can add more features to obtain a new model. If we consider first 28 day, we can get the formula:<br>$$<br>y = b + \sum_{j} w_j x_j<br>$$<br>And replace the items in Sigmoid, we can get the follow formula.<br>$$<br>y = b + \sum_{i} c_i sigmoid(b_i + \sum_{j}w_{ij} x_j)<br>$$<br>which $w_{ij}$ represent the weight for $x_j$ for $i-th$ sigmoid.  </p>
+<p>And then, we define $r_i = sigmoid(b_i + \sum_{j}w_{ij}x_{j})$, and let $i: 1, 2, 3$ and $j: 1, 2, 3$. and then, we can get the formula as follow.<br>$$<br>r_1 = b_1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3<br>$$</p>
+<p>$$<br>r2 = b_2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3<br>$$</p>
+<p>$$<br>r3 = b_3 + w_{31}x_1 + w_{32}x_2 + x_{33}x_3<br>$$</p>
+<p>We can change the above formula to matrix operations.<br>$$<br>\begin{bmatrix} r_1 \ r_2 \ r_3 \end{bmatrix} =<br>\begin{bmatrix} b_1 \ b_2 \ b_3 \end{bmatrix} +<br>\begin{bmatrix}<br>w_{11}\ \ w_{12}\ \ w_{13} \<br>w_{21}\ \ w_{22}\ \ w_{23} \<br>w_{31}\ \ w_{32}\ \ w_{33} \<br>\end{bmatrix}<br>\begin{bmatrix} x_1 \ x_2 \ x_3 \end{bmatrix}<br>$$<br>And then, by changing the matrix to vertor, we can get the formula as follow:<br>$$<br>\vec r = \vec b + W \vec x<br>$$<br>After that, we define $a_i = \sigma(r_i), i=1,2,3$, which $\sigma()$ is the sigmoid operation. Finally, using the sum of $c_i \times a_i$ and add the $b$, the $y$ obtained. The complete process as figure 4.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/The%20complete%20process%20of%20calculation.PNG"></p>
 <center>fig 4: The complete process of calculation</center>
-<p>We get the unknown parameters, including <span class="markdown-them-math-inline">$W, \vec{b}, \vec{c}, b$</span>. And then, we can take out every column or row of <span class="markdown-them-math-inline">$W$</span> and concatenate them to form a long vector, along with <span class="markdown-them-math-inline">$\vec{b}, \vec{c}$</span> and the other <span class="markdown-them-math-inline">$\vec{b}$</span>. The long vector is represented by the symbol <span class="markdown-them-math-inline">$\theta$</span>.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/fig%205.jpeg" alt=""></p>
+
+<p>We get the unknown parameters, including $W, \vec{b}, \vec{c}, b$. And then, we can take out every column or row of $W$ and concatenate them to form a long vector, along with $\vec{b}, \vec{c}$ and the other $\vec{b}$. The long vector is represented by the symbol $\theta$.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/fig%205.jpeg"></p>
 <center>fig 5</center>
+
 <p>Now, we back to ML framework, we can define loss.</p>
 <ol>
-<li>Loss if a function of paramenters <span class="markdown-them-math-inline">$L(\theta)$</span></li>
+<li>Loss if a function of paramenters $L(\theta)$</li>
 <li>Loss means how good a set of values is.</li>
-<li>The process is the same. Given a set of values of the unknown parameters, and get the <span class="markdown-them-math-inline">$\widehat{y}$</span>. And then, calculate the absolute value of <span class="markdown-them-math-inline">$y$</span> and <span class="markdown-them-math-inline">$\widehat{y}$</span>, the loss is the average. The formula as follow:</li>
+<li>The process is the same. Given a set of values of the unknown parameters, and get the $\widehat{y}$. And then, calculate the absolute value of $y$ and $\widehat{y}$, the loss is the average. The formula as follow:</li>
 </ol>
-<div class="markdown-them-math-block">$$L = \frac{1}{N} \sum_{n}e_{n}
-$$</div><p>Optimization of new model</p>
-<div class="markdown-them-math-block">$$\theta^{*} = arg \min_{\theta} L
-$$</div><p>The step of looking for a <span class="markdown-them-math-inline">$\theta$</span> that make our loss as small as possible.</p>
+<p>$$<br>L = \frac{1}{N} \sum_{n}e_{n}<br>$$</p>
+<p>Optimization of new model<br>$$<br>\theta^{*} = arg \min_{\theta} L<br>$$<br>The step of looking for a $\theta$ that make our loss as small as possible.</p>
 <ol>
-<li>(Randomly) Pick initial values <span class="markdown-them-math-inline">$\theta^{0}$</span></li>
-<li>Calculate the derivative of <span class="markdown-them-math-inline">$L$</span> with respect to every parameter, we use <span class="markdown-them-math-inline">$\vec g$</span>  to represent this vector. And this vector has a special name, we call it “gradient”.</li>
+<li>(Randomly) Pick initial values $\theta^{0}$</li>
+<li>Calculate the derivative of $L$ with respect to every parameter, we use $\vec g$  to represent this vector. And this vector has a special name, we call it “gradient”.</li>
 </ol>
-<div class="markdown-them-math-block">$$g = 
-\begin{bmatrix}
-\frac{\partial L}{\partial \theta_{1}} |_{\theta = \theta^{0}} \\
-\frac{\partial L}{\partial \theta_{2}} |_{\theta = \theta^{0}} \\
-...
-\end{bmatrix}
-$$</div><p>​	And a gradient is expressed as follow:</p>
-<div class="markdown-them-math-block">$$g = \Delta L(\theta^{0})
-$$</div><ol start="3">
-<li>update the <span class="markdown-them-math-inline">$\theta $</span> using follow formula:</li>
+<p>$$<br>g =<br>\begin{bmatrix}<br>\frac{\partial L}{\partial \theta_{1}} |<em>{\theta = \theta^{0}} \<br>\frac{\partial L}{\partial \theta</em>{2}} |_{\theta = \theta^{0}} \<br>…<br>\end{bmatrix}<br>$$</p>
+<p>​    And a gradient is expressed as follow:<br>$$<br>g = \Delta L(\theta^{0})<br>$$</p>
+<ol start="3">
+<li>update the $\theta $ using follow formula:</li>
 </ol>
-<div class="markdown-them-math-block">$$\begin{bmatrix}
-\theta^{1}_{1} \\
-\theta^{1}_{2} \\
-...
-\end{bmatrix}
-=
-\begin{bmatrix}
-\theta^{0}_{1} \\
-\theta^{0}_{2} \\
-...
-\end{bmatrix}
--
-\begin{bmatrix}
-\eta \frac{\partial L}{\partial \theta_{1}} |_{\theta = \theta^{0}} \\
-\eta \frac{\partial L}{\partial \theta_{2}} |_{\theta = \theta^{0}} \\
-...
-\end{bmatrix}
-$$</div><p>where <span class="markdown-them-math-inline">$\eta$</span> Is the learning rate. And the other form as follow:</p>
-<div class="markdown-them-math-block">$$\theta^{1} = \theta^{0} - \eta \Delta L(\theta^{0})
-$$</div><ol start="4">
-<li>update the <span class="markdown-them-math-inline">$\theta $</span> iteratively.</li>
+<p>$$<br>\begin{bmatrix}<br>\theta^{1}<em>{1} \<br>\theta^{1}</em>{2} \<br>…<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>\theta^{0}<em>{1} \<br>\theta^{0}</em>{2} \<br>…<br>\end{bmatrix}<br>-<br>\begin{bmatrix}<br>\eta \frac{\partial L}{\partial \theta_{1}} |<em>{\theta = \theta^{0}} \<br>\eta \frac{\partial L}{\partial \theta</em>{2}} |_{\theta = \theta^{0}} \<br>…<br>\end{bmatrix}<br>$$</p>
+<p>where $\eta$ Is the learning rate. And the other form as follow:<br>$$<br>\theta^{1} = \theta^{0} - \eta \Delta L(\theta^{0})<br>$$</p>
+<ol start="4">
+<li>update the $\theta $ iteratively.</li>
 </ol>
 <p>So, back to the original problem, how to represent this function like figure 6?</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/image-20211123140130541.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/image-20211123140130541.png"></p>
 <center>fig 6: the blue curve</center>
-<p>We can use rectified linear unit(ReLU) which formula and curve as follow:</p>
-<div class="markdown-them-math-block">$$ReLU = c \max(0, b + wx_1)
-$$</div><p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/image-20211123140449213.png" alt=""></p>
+
+<p>We can use rectified linear unit(ReLU) which formula and curve as follow:<br>$$<br>ReLU = c \max(0, b + wx_1)<br>$$<br><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/image-20211123140449213.png"></p>
 <center>fig 7: the curve of the ReLU</center>
-<p>So, we can change the <span class="markdown-them-math-inline">$sigmoid$</span> function to <span class="markdown-them-math-inline">$ReLU$</span> as follow:</p>
-<div class="markdown-them-math-block">$$y = b + \sum_{i} sigmoid(b_i + \sum_{j}w_{ij}x_{j})
-$$</div><div class="markdown-them-math-block">$$y = b + \sum_{2i} max(0, b_i + \sum_{j}w_{ij}x_{j})
-$$</div><p>In machine learning, the <span class="markdown-them-math-inline">$sigmoid$</span> and <span class="markdown-them-math-inline">$ReLU$</span> is called activation function.</p>
+
+<p>So, we can change the $sigmoid$ function to $ReLU$ as follow:<br>$$<br>y = b + \sum_{i} sigmoid(b_i + \sum_{j}w_{ij}x_{j})<br>$$</p>
+<p>$$<br>y = b + \sum_{2i} max(0, b_i + \sum_{j}w_{ij}x_{j})<br>$$</p>
+<p>In machine learning, the $sigmoid$ and $ReLU$ is called activation function.</p>
 
       
     </div>
@@ -212,7 +172,7 @@ $$</div><p>In machine learning, the <span class="markdown-them-math-inline">$sig
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 altriavin<br>
+      &copy; 2022 altriavin<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a><br>
       <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">皖ICP备2021013786号</a>
     </div>
