@@ -67,47 +67,86 @@
       
         <p>I am learning ML and DL by watching video on YouTube. There is my study notes. In the first lesson, he mainly introduce the concept of ML. And then, an example of linear models is given to help us open the door to ML.</p>
 <span id="more"></span>
-
-<h3 id="The-type-of-ML"><a href="#The-type-of-ML" class="headerlink" title="The type of ML"></a>The type of ML</h3><p><strong>Regression</strong>: The function outputs a scalar.</p>
+<h3 id="the-type-of-ml">The type of ML</h3>
+<p><strong>Regression</strong>: The function outputs a scalar.</p>
 <p><strong>Classification</strong>: Given options(classes), the function outputs the correct one.</p>
 <p><strong>structured learning</strong>: create something with structure</p>
-<h3 id="The-example-of-Linear-model"><a href="#The-example-of-Linear-model" class="headerlink" title="The example of Linear model"></a>The example of Linear model</h3><p>a example for the Machine learning – predict the youtube channels</p>
-<h4 id="Function-with-unknown"><a href="#Function-with-unknown" class="headerlink" title="Function with unknown"></a>Function with unknown</h4><p>$$<br>y = b + wx_1<br>$$</p>
-<p>which $y$ represents the total views we will get today, $x_1$ is the number of views that we got on this channels yesterday, $w$ and $b$ is unknown parameters.</p>
-<h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function on parameters $L(b,w)$</p>
-<p>for example, we can define the loss function as follow:<br>$$<br>\widehat{y_i} = b_1 + w_1x_i<br>$$<br>$$<br>y_i = b_1 + w_1x_i<br>$$</p>
-<p>$$<br>e_i = |{\widehat{y_i} - y_i}|<br>$$</p>
-<p>$$<br>L = \frac{1}{N} \sum_{i=1}^{N}e_i<br>$$</p>
-<p>which $\widehat{y_i}$ represent the $ith$ predictive value. $y_i$ is the $ith$ true value. $e_i$ is the the mean absolute error(MAE) of $\widehat{y_i}$ and $y_i$, in other case, we can define $e_i = (\widehat{y_i} - y_i)^2$, which is the mean square error(MSE). In that case, we use MAE. $Loss$ is the average of the $e_i$.</p>
-<h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><p>$$<br>w^*, b^* = arg \min_{w,b}L<br>$$</p>
-<p>which the $w^*$ and $b^*$ is the $w$ and $b$ which can make the loss smallest.</p>
-<p>The way to find the best $w$ and $b$ is called <strong>Gradient Descent</strong>.</p>
-<p>How to use the Gradient Descent? </p>
-<p>Firstly, we suppose that there is only one paramenter $w$.  Then, we can get the error surface about $L$ and $w$ as follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20loss%20between%20L%20and%20w.jpeg"></p>
-<center>fig 1: the loss between $L$ and $w$</center>
-
-<p>After that, we need to randomly select an initial point called $w_0$ and compute the derivative of loss with respect to $w$ as follow:<br>$$<br>\frac{\partial{L}}{\partial{w}}|<em>{w=w^0}<br>$$<br>If the result is negative, we need to increase $w$, others, we need to decrease $w$. And the step size as follow:<br>$$<br>\eta \frac{\partial{L}}{\partial{w}}|</em>{w=w^0}<br>$$<br>which $\eta$ represent the learning rate, it depends on you. </p>
-<p>The next step is to move to the new position which  is called $w_1$, the formula as follow:<br>$$<br>w_1 =<br>\begin{cases}<br>w_0 - \eta \frac{\partial{L}}{\partial{w}}|_{w=w^0} &amp; {\frac{\partial{L}}{\partial{w}} &gt;= 0}\<br>w_0 + \eta \frac{\partial{L}}{\partial{w}} &amp; {\frac{\partial{L}}{\partial{w}} &lt; 0}<br>\end{cases}<br>$$<br>After that, we need to update $w$ iteratively.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/update%20the%20w%20iteratively.jpeg"></p>
-<center>fig 2: update the w iteratively</center>
-
+<h3 id="the-example-of-linear-model">The example of Linear model</h3>
+<p>a example for the Machine learning -- predict the youtube channels</p>
+<h4 id="function-with-unknown">Function with unknown</h4>
+<p><span class="math display">\[
+y = b + wx_1
+\]</span></p>
+<p>which <span class="math inline">\(y\)</span> represents the total views we will get today, <span class="math inline">\(x_1\)</span> is the number of views that we got on this channels yesterday, <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> is unknown parameters.</p>
+<h4 id="define-loss-from-training-data">Define Loss from Training Data</h4>
+<p>Loss is a function on parameters <span class="math inline">\(L(b,w)\)</span></p>
+<p>for example, we can define the loss function as follow: <span class="math display">\[
+\widehat{y_i} = b_1 + w_1x_i
+\]</span> <span class="math display">\[
+y_i = b_1 + w_1x_i
+\]</span></p>
+<p><span class="math display">\[
+e_i = |{\widehat{y_i} - y_i}|
+\]</span></p>
+<p><span class="math display">\[
+L = \frac{1}{N} \sum_{i=1}^{N}e_i
+\]</span></p>
+<p>which <span class="math inline">\(\widehat{y_i}\)</span> represent the <span class="math inline">\(ith\)</span> predictive value. <span class="math inline">\(y_i\)</span> is the <span class="math inline">\(ith\)</span> true value. <span class="math inline">\(e_i\)</span> is the the mean absolute error(MAE) of <span class="math inline">\(\widehat{y_i}\)</span> and <span class="math inline">\(y_i\)</span>, in other case, we can define <span class="math inline">\(e_i = (\widehat{y_i} - y_i)^2\)</span>, which is the mean square error(MSE). In that case, we use MAE. <span class="math inline">\(Loss\)</span> is the average of the <span class="math inline">\(e_i\)</span>.</p>
+<h4 id="optimization">Optimization</h4>
+<p><span class="math display">\[
+w^*, b^* = arg \min_{w,b}L
+\]</span></p>
+<p>which the <span class="math inline">\(w^*\)</span> and <span class="math inline">\(b^*\)</span> is the <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> which can make the loss smallest.</p>
+<p>The way to find the best <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> is called <strong>Gradient Descent</strong>.</p>
+<p>How to use the Gradient Descent?</p>
+<p>Firstly, we suppose that there is only one paramenter <span class="math inline">\(w\)</span>. Then, we can get the error surface about <span class="math inline">\(L\)</span> and <span class="math inline">\(w\)</span> as follow.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20loss%20between%20L%20and%20w.jpeg" /></p>
+<center>
+fig 1: the loss between <span class="math inline">\(L\)</span> and <span class="math inline">\(w\)</span>
+</center>
+<p>After that, we need to randomly select an initial point called <span class="math inline">\(w_0\)</span> and compute the derivative of loss with respect to <span class="math inline">\(w\)</span> as follow: <span class="math display">\[
+\frac{\partial{L}}{\partial{w}}|_{w=w^0}
+\]</span> If the result is negative, we need to increase <span class="math inline">\(w\)</span>, others, we need to decrease <span class="math inline">\(w\)</span>. And the step size as follow: <span class="math display">\[
+\eta \frac{\partial{L}}{\partial{w}}|_{w=w^0}
+\]</span> which <span class="math inline">\(\eta\)</span> represent the learning rate, it depends on you.</p>
+<p>The next step is to move to the new position which is called <span class="math inline">\(w_1\)</span>, the formula as follow: <span class="math display">\[
+w_1 =
+\begin{cases}
+w_0 - \eta \frac{\partial{L}}{\partial{w}}|_{w=w^0} &amp; {\frac{\partial{L}}{\partial{w}} &gt;= 0}\\
+w_0 + \eta \frac{\partial{L}}{\partial{w}} &amp; {\frac{\partial{L}}{\partial{w}} &lt; 0}
+\end{cases}
+\]</span> After that, we need to update <span class="math inline">\(w\)</span> iteratively.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/update%20the%20w%20iteratively.jpeg" /></p>
+<center>
+fig 2: update the w iteratively
+</center>
 <p><strong>Gradient Descent</strong> is not a prefect method that has the problem of local minima.</p>
-<p>Back to our problem, we actually have two parameters, $w$ and $b$. We can get the best $w$ and $b$  follow the steps below.</p>
-<ol>
-<li>(Randomly) Pick initial values $w^0$, $b^0$</li>
+<p>Back to our problem, we actually have two parameters, <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span>. We can get the best <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> follow the steps below.</p>
+<ol type="1">
+<li>(Randomly) Pick initial values <span class="math inline">\(w^0\)</span>, <span class="math inline">\(b^0\)</span></li>
 <li>compute</li>
 </ol>
-<p>$$<br>\frac{\partial L}{\partial w}|_{w=w^0,b=b_0}<br>$$</p>
-<p>$$<br>\frac{\partial L}{\partial b}|_{w=w^0,b=b_0}<br>$$</p>
-<p>and then, we can compute the $w_1$ and $b_1$ as the follow formula.<br>$$<br>w_1 = w_0 - \eta \frac{\partial L}{\partial w}|_{w=w^0,b=b^0}<br>$$</p>
-<p>$$<br>b_1 = b_0 - \eta \frac{\partial L}{\partial b}|_{w=w^0,b=b^0}<br>$$</p>
-<ol start="3">
-<li>update $w$ and $b$ iteratively</li>
+<p><span class="math display">\[
+\frac{\partial L}{\partial w}|_{w=w^0,b=b_0}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial b}|_{w=w^0,b=b_0}
+\]</span></p>
+<p>and then, we can compute the <span class="math inline">\(w_1\)</span> and <span class="math inline">\(b_1\)</span> as the follow formula. <span class="math display">\[
+w_1 = w_0 - \eta \frac{\partial L}{\partial w}|_{w=w^0,b=b^0}
+\]</span></p>
+<p><span class="math display">\[
+b_1 = b_0 - \eta \frac{\partial L}{\partial b}|_{w=w^0,b=b^0}
+\]</span></p>
+<ol start="3" type="1">
+<li>update <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> iteratively</li>
 </ol>
 <p>After the above step, we can get the error surface as follow.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20error%20surface%20of%20the%20w%20and%20b.jpeg"></p>
-<center>fig 3: the error surface of the w and b</center>
+<p><img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/the%20error%20surface%20of%20the%20w%20and%20b.jpeg" /></p>
+<center>
+fig 3: the error surface of the w and b
+</center>
+
       
     </div>
     <footer class="article-footer">
@@ -130,7 +169,7 @@
     </a>
   
   
-    <a href="../../../02/08/to%20fo%20list/LHY%20ML%204/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../../../02/08/C++%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%20%E7%AC%AC%E4%B8%80%E8%8A%82/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">
         
