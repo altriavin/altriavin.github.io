@@ -170,66 +170,13 @@ figure 1: Overview of the DNN Training Procedure
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="section">1</h3>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102017518.png" alt="image-20220410201745479" /><figcaption aria-hidden="true">image-20220410201745479</figcaption>
-</figure>
-<p>多文件编译和链接:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">-c 生成临时对象文件</span></span><br><span class="line">g++ -c hello.cpp -o hello.o</span><br><span class="line">g++ -c main.cpp -o main.o</span><br><span class="line"></span><br><span class="line">g++ hello.o main.o -o a.out</span><br><span class="line"><span class="meta">#</span><span class="bash">这样修改了hello之后只需要重新编译hello</span></span><br></pre></td></tr></table></figure>
-<p>Makefile</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102027714.png" alt="3C1854D2-9265-4F03-B183-4675CE990C53" /><figcaption aria-hidden="true">3C1854D2-9265-4F03-B183-4675CE990C53</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102028933.png" alt="F065B72D-6D2E-43A3-859B-3B53E48B2F02" /><figcaption aria-hidden="true">F065B72D-6D2E-43A3-859B-3B53E48B2F02</figcaption>
-</figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -B ./cmake_result #根据CMakelist.txt生成</span><br><span class="line">cmake -Bbuild -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_STANDARD=17 #指定编译器编译该程序; 指定C++版本</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102045121.png" alt="A4850756-7E72-4A3A-934A-0ED6BE3B2B06" /><figcaption aria-hidden="true">A4850756-7E72-4A3A-934A-0ED6BE3B2B06</figcaption>
-</figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd a.out #查看a.out链接的动态库</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102054746.jpeg" alt="CA551652-EF2B-4580-9DE2-517708164139_1_101_o" /><figcaption aria-hidden="true">CA551652-EF2B-4580-9DE2-517708164139_1_101_o</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102059052.png" alt="87AE5613-5B56-41FA-8257-37CF6D51140F" /><figcaption aria-hidden="true">87AE5613-5B56-41FA-8257-37CF6D51140F</figcaption>
-</figure>
-<p>声明调用定义</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102108941.png" alt="1568B205-490E-4F0B-A858-D8A8F1CC310B" /><figcaption aria-hidden="true">1568B205-490E-4F0B-A858-D8A8F1CC310B</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102108930.png" alt="F30887B8-6CDF-4250-8663-B2603FDC08E6" /><figcaption aria-hidden="true">F30887B8-6CDF-4250-8663-B2603FDC08E6</figcaption>
-</figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;hello.h&gt;和  “hello.h” </span><br><span class="line"></span><br><span class="line"> “hello.h&quot;表示优先搜索当前目录</span><br><span class="line">&lt;hello.h&gt;搜索的是系统文件夹</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102114715.png" alt="9D2B4BF5-3295-49FC-B16D-0B3DA5A651B3" /><figcaption aria-hidden="true">9D2B4BF5-3295-49FC-B16D-0B3DA5A651B3</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102114627.png" alt="A4D1B485-6E9C-43CC-8363-F2AF995F8F6C" /><figcaption aria-hidden="true">A4D1B485-6E9C-43CC-8363-F2AF995F8F6C</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102114839.png" alt="55026F20-5035-42E8-B2F7-6D0E6F75D63D" /><figcaption aria-hidden="true">55026F20-5035-42E8-B2F7-6D0E6F75D63D</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102116879.png" alt="5864E4F0-7AFD-4B62-8EB4-5B19F8A9C582" /><figcaption aria-hidden="true">5864E4F0-7AFD-4B62-8EB4-5B19F8A9C582</figcaption>
-</figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUBLIC表示让引用hellolib的可执行文件自动添加这个路径; </span><br><span class="line">PRIVATE表示不自动添加</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102123532.png" alt="8D9988EE-5F75-418B-9407-661040BD7444" /><figcaption aria-hidden="true">8D9988EE-5F75-418B-9407-661040BD7444</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102127103.png" alt="557B98A0-7CA3-464A-8CBD-625E51E02F6F" /><figcaption aria-hidden="true">557B98A0-7CA3-464A-8CBD-625E51E02F6F</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102142561.png" alt="FD260D4F-D397-4F08-BA0D-32B8279DD2BE" /><figcaption aria-hidden="true">FD260D4F-D397-4F08-BA0D-32B8279DD2BE</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/altriavin/PictureBed/img/202204102142776.png" alt="077C70DB-005E-420D-A00B-6C8BB0EC1B20" /><figcaption aria-hidden="true">077C70DB-005E-420D-A00B-6C8BB0EC1B20</figcaption>
-</figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">作为子模块引入可能存在棱形引入的错误, 系统预安装的第三方库就不会有这个问题</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++有包管理器</span><br></pre></td></tr></table></figure>
-
+        <h3 id="c并行计算第一节课">1 C++并行计算第一节课</h3>
+<p>C++并行计算课程学习笔记, 第一节课主要讲解编译器和cmake</p>
+        
+          <p class="article-more-link">
+            <a href="2021/02/08/C++%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%20%E7%AC%AC%E4%B8%80%E8%8A%82/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
